@@ -1,0 +1,36 @@
+{
+  "name": "pg-js",
+  "version": "0.1.0",
+  "description": "PostgreSQL to javascript API generator",
+  "main": "pg-js.js",
+  "scripts": {
+    "test": "mocha test/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nherment/pg-js.git"
+  },
+  "keywords": [
+    "postgresql",
+    "orm",
+    "function",
+    "relational",
+    "mapping"
+  ],
+  "author": "Nicolas HERMENT <nherment@gmail.com>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/nherment/pg-js/issues"
+  },
+  "homepage": "https://github.com/nherment/pg-js#readme",
+  "devDependencies": {
+    "mocha": "2.4.5"
+  },
+  "dependencies": {
+    "jsonlint": "1.6.2",
+    "lodash": "4.6.0",
+    "pg": "4.5.1",
+    "serial": "0.0.9",
+    "wrench": "1.5.8"
+  }
+}

@@ -1,0 +1,6 @@
+
+-- DROP TABLE IF EXISTS accounts;
+CREATE TABLE accounts (
+  name CHARACTER VARYING,
+  created_date TIMESTAMP NOT NULL DEFAULT NOW()
+);

@@ -1,0 +1,15 @@
+{
+  "id": "createAccount",
+  "query": [
+    "INSERT INTO accounts",
+    "(name)",
+    "VALUES",
+    "($1)"
+  ],
+  "args": [{
+    "type": "string"
+  }],
+  "returns": {
+    "uniqueResult": true
+  }
+}
