@@ -1,5 +1,6 @@
 
-var assert = require('assert');
+var path = require('path')
+var assert = require('assert');;
 
 describe('API database', function() {
 
@@ -7,32 +8,38 @@ describe('API database', function() {
   var testEntryPrefix = 'unit_test_';
   var testId = Date.now();
 
+  var queryDir = path.resolve(__dirname, 'queries');
+
+  var config = {
+    queryDirectory: queryDir,
+    pgConnString: 'postgres://pg_js_test:pg_js_test@127.0.0.1/pg_js_test'
+  };
+
   it('load the dependency', function() {
-    db = require('../../../lib/database/');
+    db = require('../../../lib/database/')(config);
   });
 
   it('populate test data', function(done) {
     
-    var accountName = testEntryPrefix + testId;
-    db.createAccount(accountName, function(err) {
+    var arg1 = testEntryPrefix + testId;
+    db.createFubar(arg1, "2", "3", function(err) {
       done(err);
     });
   });
 
-  it('fetchAccount', function() {
-    var accountName = testEntryPrefix + testId;
-    db.fetchAccount(accountName, function(err, account) {
+  it('fetch', function(done) {
+    var arg1 = testEntryPrefix + testId;
+    db.testFunc(arg1, "2", "3", function(err, account) {
       assert.ok(!err, err ? err.stack : '');
       assert.ok(account);
-      assert.equal(account.name, accountName);
-      assert.ok(account.createdDate instanceof Date);
-      assert.ok(account.createdDate.getTime() > (Date.now() - 2000));
+      assert.equal(account.arg1, arg1);
+      done();
     });
   });
 
   after(function(done) {
-    var DB = require('../../../lib/database/ClientPool.js')();
-    var qryStr = "DELETE FROM accounts WHERE name LIKE '"+testEntryPrefix+"'";
+    var DB = require('../../../lib/database/ClientPool.js')(config);
+    var qryStr = "DELETE FROM fubar WHERE arg1 LIKE '"+testEntryPrefix+"%'";
     
     DB.query(qryStr, [], function(err) {
       done(err);

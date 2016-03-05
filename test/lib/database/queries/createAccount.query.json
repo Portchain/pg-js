@@ -1,0 +1,19 @@
+{
+  "id": "createFubar",
+  "query": [
+    "INSERT INTO fubar",
+    "(arg1, arg2, arg3)",
+    "VALUES",
+    "($1, $2, $3)"
+  ],
+  "args": [{
+    "type": "string"
+  }, {
+    "type": "string"
+  }, {
+    "type": "string"
+  }],
+  "returns": {
+    "uniqueResult": true
+  }
+}

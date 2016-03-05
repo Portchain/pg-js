@@ -1,0 +1,18 @@
+{
+  "id": "testFunc",
+  "query": [
+    "SELECT arg1, arg2, arg3",
+    "FROM fubar",
+    "WHERE arg1 = $1 AND arg2 = $2 AND arg3 = $3 LIMIT 1"
+  ],
+  "args": [{
+    "type": "string"
+  }, {
+    "type": "string"
+  }, {
+    "type": "string"
+  }],
+  "returns": {
+    "uniqueResult": true
+  }
+}
