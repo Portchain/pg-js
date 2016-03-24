@@ -54,3 +54,39 @@ pgJs.myFunc(arg1, arg2, arg3, function(err, row) {
 });
 
 ```
+
+
+## Transactions
+
+You can wrap your function/queries inside a transaction block (``BEGiN``/
+``COMMIT``).
+
+The functions will be called sequentially, in the order they are invoked.
+The callback for each function becomes optional.
+The final ``commit(...)`` callback is optional as well. It will be called no matter
+what.
+
+
+```
+var tx = pgJs.begin();
+
+tx.myFunc1(..., function(err, result) {
+
+});
+
+tx.myFunc2(...);
+
+tx.myFunc3(..., function(err, result) {
+
+});
+
+tx.commit(function(err, results) {
+  // err: if any error happened / tx aborted
+  // results: an array of all the results, in order.
+});
+```
+
+> tx blocks will take and hold a client from the connection pool until the
+> client is released via commit. It is possible to manually rollback a tx block
+> through the ``rollback()`` function. It works like ``commit()`` but the only
+> possible argument is an error.
