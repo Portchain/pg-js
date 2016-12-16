@@ -5,3 +5,6 @@ machine:
   node:
     version: 7.2.1
 
+test:
+  pre:
+    - psql -h 127.0.0.1 -u ubuntu circle_test < test/scripts/create_tables.sql
