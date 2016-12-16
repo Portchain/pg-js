@@ -12,11 +12,23 @@ describe('API database', function() {
 
   var config = {
     queryDirectory: queryDir,
-    pgConnString: 'postgres://pg_js_test:pg_js_test@127.0.0.1/pg_js_test'
+    user: 'pg_js_test',
+    password: 'pg_js_test',
+    host: '127.0.0.1',
+    database: 'pg_js_test',
+    ssl: true
   };
 
   it('load the dependency', function() {
     db = require('../../../lib/database/')(config);
+  });
+
+  it('ensure SSL is used', function(done) {
+    db.sslIsUsed(function(err, result) {
+      assert.ok(!err, err ? err.stack : '');
+      assert.ok(result)
+      done();
+    });
   });
 
   it('populate test data', function(done) {
@@ -29,6 +41,24 @@ describe('API database', function() {
 
   it('fetch', function(done) {
     var arg1 = testEntryPrefix + testId;
+    db.testFunc(arg1, "2", "3", function(err, account) {
+      assert.ok(!err, err ? err.stack : '');
+      assert.ok(account);
+      assert.equal(account.arg1, arg1);
+      done();
+    });
+  });
+
+  it('SQL query file', function(done) {
+    
+    var arg1 = testEntryPrefix + testId + '_sql';
+    db.createAccount(arg1, "2", "3", function(err) {
+      done(err);
+    });
+  });
+
+  it('fetch result from SQL file', function(done) {
+    var arg1 = testEntryPrefix + testId + '_sql';
     db.testFunc(arg1, "2", "3", function(err, account) {
       assert.ok(!err, err ? err.stack : '');
       assert.ok(account);
