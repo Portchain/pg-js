@@ -7,4 +7,4 @@ machine:
 
 test:
   pre:
-    - psql -h 127.0.0.1 -u ubuntu circle_test < test/scripts/create_tables.sql
+    - psql -h 127.0.0.1 -U ubuntu circle_test < test/scripts/create_tables.sql
