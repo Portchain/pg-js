@@ -14,9 +14,22 @@ npm install -S -E pg-js
 Put your SQL queries in JSON files in a given directory. This directory will be
 recursively parsed by pg-js.
 
-The suffix ``.query.json`` is necessary for the queries to be read by pg-js.
+Either suffix ``.query.sql`` or ``.query.json`` is necessary for the queries to
+be read by pg-js.
 
 Query config:
+
+```
+// ./queries/myFunc.query.sql
+-- $1: arg1
+-- $2: arg2
+-- $3: arg3
+SELECT arg1, arg2, arg3
+  FROM fubar
+WHERE arg1 = $1 AND arg2 = $2 AND arg3 = $3 LIMIT 1
+```
+
+Or you can use ugly JSON (don't, I was stupid to allow that..):
 
 ```
 // ./queries/myFunc.query.json
