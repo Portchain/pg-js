@@ -16,6 +16,7 @@ describe('API database', function() {
     password: process.env.TEST_DB_PWD,
     host: process.env.TEST_DB_HOST || '127.0.0.1',
     database: process.env.TEST_DB_NAME || 'pg_js_test',
+    port: process.env.TEST_DB_PORT || 5432,
     ssl: true
   };
 
@@ -64,6 +65,23 @@ describe('API database', function() {
       assert.ok(account);
       assert.equal(account.arg1, arg1);
       done();
+    });
+  });
+
+  it('insert multiple rows at once', function(done) {
+    
+    var arg1 = testEntryPrefix + testId + '_multi_insert';
+    let data = [
+      [arg1, "1", "1"],
+      [arg1, "2", "2"],
+      [arg1, "3", "3"]
+    ]
+    
+    db.multiInsert(data, function(err) {
+      if(err) return done(err)
+      db.listEntriesByArg1(arg1, (err, entries) => {
+        done()
+      })
     });
   });
 
