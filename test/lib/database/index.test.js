@@ -33,7 +33,6 @@ describe('API database', function() {
   });
 
   it('populate test data', function(done) {
-    
     var arg1 = testEntryPrefix + testId;
     db.createFubar(arg1, "2", "3", function(err) {
       done(err);
@@ -42,10 +41,11 @@ describe('API database', function() {
 
   it('fetch', function(done) {
     var arg1 = testEntryPrefix + testId;
-    db.testFunc(arg1, "2", "3", function(err, account) {
+    db.testFunc(arg1, "2", "3", function(err, accounts) {
       assert.ok(!err, err ? err.stack : '');
-      assert.ok(account);
-      assert.equal(account.arg1, arg1);
+      assert.ok(accounts);
+      assert.ok(accounts[0]);
+      assert.equal(accounts[0].arg1, arg1);
       done();
     });
   });
@@ -60,10 +60,11 @@ describe('API database', function() {
 
   it('fetch result from SQL file', function(done) {
     var arg1 = testEntryPrefix + testId + '_sql';
-    db.testFunc(arg1, "2", "3", function(err, account) {
+    db.testFunc(arg1, "2", "3", function(err, accounts) {
       assert.ok(!err, err ? err.stack : '');
-      assert.ok(account);
-      assert.equal(account.arg1, arg1);
+      assert.ok(accounts);
+      assert.ok(accounts[0]);
+      assert.equal(accounts[0].arg1, arg1);
       done();
     });
   });

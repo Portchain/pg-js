@@ -11,8 +11,8 @@ npm install -S -E pg-js
 
 ## Example
 
-Put your SQL queries in JSON files in a given directory. This directory will be
-recursively parsed by pg-js.
+Put your SQL queries in SQL files in a given directory. This directory will be
+recursively parsed by `pg-js`.
 
 Either suffix ``.query.sql`` or ``.query.json`` is necessary for the queries to
 be read by pg-js.
@@ -27,30 +27,6 @@ Query config:
 SELECT arg1, arg2, arg3
   FROM fubar
 WHERE arg1 = $1 AND arg2 = $2 AND arg3 = $3 LIMIT 1
-```
-
-Or you can use ugly JSON (don't, I was stupid to allow that..):
-
-```
-// ./queries/myFunc.query.json
-{
-  "id": "myfunc",
-  "query": [
-    "SELECT arg1, arg2, arg3",
-    "FROM fubar",
-    "WHERE arg1 = $1 AND arg2 = $2 AND arg3 = $3 LIMIT 1"
-  ],
-  "args": [{
-    "type": "string"
-  }, {
-    "type": "string"
-  }, {
-    "type": "string"
-  }],
-  "returns": {
-    "uniqueResult": true
-  }
-}
 ```
 
 
@@ -71,13 +47,12 @@ pgJs.myFunc(arg1, arg2, arg3, function(err, row) {
 
 ## Transactions
 
-You can wrap your function/queries inside a transaction block (``BEGiN``/
+You can wrap your function/queries inside a transaction block (``BEGIN``/
 ``COMMIT``).
 
 The functions will be called sequentially, in the order they are invoked.
-The callback for each function becomes optional.
-The final ``commit(...)`` callback is optional as well. It will be called no matter
-what.
+The final ``commit(...)`` callback is optional as well. When present, that
+callback will be called unless rollback() is invoked.
 
 
 ```
@@ -93,13 +68,15 @@ tx.myFunc3(..., function(err, result) {
 
 });
 
-tx.commit(function(err, results) {
+tx.commit(function(err) {
   // err: if any error happened / tx aborted
   // results: an array of all the results, in order.
 });
 ```
 
 > tx blocks will take and hold a client from the connection pool until the
-> client is released via commit. It is possible to manually rollback a tx block
-> through the ``rollback()`` function. It works like ``commit()`` but the only
-> possible argument is an error.
+> client is released via commit.
+
+It is possible to manually rollback a tx block through the ``rollback()``
+function. It works like ``commit()``.
+Note that the rollback is automatic if one of the queries produces an error.
