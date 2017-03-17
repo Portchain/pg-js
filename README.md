@@ -50,9 +50,7 @@ pgJs.myFunc(arg1, arg2, arg3, function(err, row) {
 You can wrap your function/queries inside a transaction block (``BEGIN``/
 ``COMMIT``).
 
-The functions will be called sequentially, in the order they are invoked.
-The final ``commit(...)`` callback is optional as well. When present, that
-callback will be called unless rollback() is invoked.
+The functions are executed when invoked, in the order they are invoked.
 
 
 ```
@@ -75,7 +73,7 @@ tx.commit(function(err) {
 ```
 
 > tx blocks will take and hold a client from the connection pool until the
-> client is released via commit.
+> client is released via commit or rollback.
 
 It is possible to manually rollback a tx block through the ``rollback()``
 function. It works like ``commit()``.

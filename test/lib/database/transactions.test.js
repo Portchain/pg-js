@@ -89,7 +89,6 @@ describe('transaction', function() {
     it('attempting to query should fail as TX was rolled-back', function(done) {      
       tx.createFubar(arg1, "3", "4", function(err) {
         assert.ok(err)
-        assert.equal(err.code, '25P02') // in_failed_sql_transaction
         done();
       });
     });
