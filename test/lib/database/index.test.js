@@ -12,10 +12,10 @@ describe('API database', function() {
 
   var config = {
     queryDirectory: queryDir,
-    user: process.env.TEST_DB_USER || 'pg_js_test',
+    user: process.env.TEST_DB_USER || 'pgjs_test',
     password: process.env.TEST_DB_PWD,
     host: process.env.TEST_DB_HOST || '127.0.0.1',
-    database: process.env.TEST_DB_NAME || 'pg_js_test',
+    database: process.env.TEST_DB_NAME || 'pgjs_test',
     port: process.env.TEST_DB_PORT || 5432,
     ssl: true
   };
