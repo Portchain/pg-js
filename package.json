@@ -1,5 +1,5 @@
 {
-  "name": "pg-js",
+  "name": "@portchain/pg-js",
   "version": "0.6.0",
   "description": "PostgreSQL to javascript API generator",
   "main": "pg-js.js",
