@@ -4,6 +4,7 @@
   "description": "PostgreSQL to javascript API generator",
   "main": "pg-js.js",
   "scripts": {
+    "release": "xyz --repo git@github.com:Portchain/pg-js.git --branch master --tag X.Y.Z --increment",
     "test": "mocha test/**/*.test.js"
   },
   "repository": {
@@ -23,8 +24,15 @@
     "url": "https://github.com/nherment/pg-js/issues"
   },
   "homepage": "https://github.com/nherment/pg-js#readme",
+  "files": [
+    "/lib/",
+    "/README.md",
+    "/package.json",
+    "/pg-js.js"
+  ],
   "devDependencies": {
-    "mocha": "2.4.5"
+    "mocha": "2.4.5",
+    "xyz": "4.0.0"
   },
   "dependencies": {
     "jsonlint": "1.6.2",
