@@ -37,7 +37,7 @@
   "dependencies": {
     "jsonlint": "1.6.2",
     "lodash": "4.6.0",
-    "pg": "6.0.1",
+    "pg": "8.5.1",
     "serial": "0.0.9",
     "wrench": "1.5.8"
   }
