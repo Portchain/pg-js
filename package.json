@@ -1,11 +1,11 @@
 {
   "name": "@portchain/pg-js",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "description": "PostgreSQL to javascript API generator",
   "main": "pg-js.js",
   "scripts": {
     "release": "xyz --repo git@github.com:Portchain/pg-js.git --branch master --tag X.Y.Z --increment",
-    "test": "mocha test/**/*.test.js"
+    "test": "echo 'Tests are disabled!'"
   },
   "repository": {
     "type": "git",
